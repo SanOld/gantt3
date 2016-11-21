@@ -1,6 +1,7 @@
   
 var defaultHours = 8;
-var opt_resource = [];
+var resource_type = ["Материал", "Оборудование", "Интсрумент"]; // array resources type
+var opt_resource = []; //options resources type to lightbox
 var current_task = {};
 //  gantt.config.xml_date = "%d-%m-%Y";
 //gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";
@@ -77,25 +78,22 @@ gantt.locale.labels.section_hours = "Кол-во часов в день";
 gantt.locale.labels.section_deadline = "Крайний срок";
 gantt.locale.labels.section_resource_type = "Тип ресурса";
 
-opt_resource.push({key:"1", label :"Материал"});
-opt_resource.push({key:"2", label :"Оборудование"});
-opt_resource.push({key:"3", label :"Интсрумент"});
-  
+
+//options resources type to lightbox  
+for (var i in resource_type){
+  opt_resource.push({key:i, label :resource_type[i]});
+}
+//lightbox.sections
 gantt.config.lightbox.sections = [
    {name: "description", height:70, map_to:"text", type:"textarea", focus:true}
   ,{name: "hours", height:30, type:"template",    map_to:"hours_template"}
   ,{name: "manhours", height:30, type:"template", map_to:"manhours_template"}
   ,{name: "mancount", height:30, type:"template", map_to:"mancount_template"}
-  ,{name: "resource_type", height:30, type:"select", map_to:"resource_type_template", options: opt_resource, onchange: eee}
+  ,{name: "resource_type", height:30, type:"select",  options: opt_resource}
   ,{name: "time",     height:30, type:"duration", map_to:"auto"}
   ,{name: "deadline", type: "duration", map_to: {start_date:"deadline"}, single_date: true}
 ];
 
-function eee(e){
-//  var task = gantt.getTask(gantt.getSelectedId());
-//  task.resource_type = e.target.value;
-//  gantt.render();
-}
 
 //=====deadline
 gantt.addTaskLayer(function draw_deadline(task) {
@@ -200,7 +198,7 @@ function getResorceAmount(task){
 };
 function getResourceType(task){
   if(task.type == "resource"){
-    var text = opt_resource[task.resource_type] ? opt_resource[task.resource_type] : opt_resource[0].label;
+    var text = resource_type[task.resource_type] ? resource_type[task.resource_type] : resource_type[0];
     return "<i class='type'>" + text + "</i>";
   } 
   return "";

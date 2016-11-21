@@ -14,13 +14,14 @@ $(document).ready(function() {
   include("/js/scale.js");
   
   gantt.attachEvent("onBeforeLightbox", function(id) { 
-    var task = gantt.getTask(id);
+    var task = current_task = gantt.getTask(id);
     task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getHours(task) + ">";
     task.manhours_template = "<input type='number' class='manhours'  step='0.1'  value=" + getManHours(task) + ">";
     task.mancount_template = "<input type='number' class='mancount'  step='0.1'  value=" + getManCount(task) + ">";
  
     return true
-  });
+  }); 
+    
   gantt.attachEvent("onLightbox", function (task_id){
     currentTask = gantt.getTask(task_id);
     var task = gantt.getTask(task_id);
@@ -36,6 +37,13 @@ $(document).ready(function() {
     
     var node_new_duration = gantt.getLightboxSection('time').node;
     var new_duration = $(node_new_duration).find('.gantt_duration_value');
+    
+    var node_resource_type = gantt.getLightboxSection('resource_type').node;
+    var new_resource_type = $(node_resource_type).find('select');
+    
+    $(new_resource_type).on('change', function(e){
+      task.resource_type = gantt.getLightboxSection('resource_type').getValue();
+    });   
     
     $('.hours').on('change', function(e){
       new_duration.val((manhours.val()/mancount.val()/hours.val()));
@@ -62,10 +70,8 @@ $(document).ready(function() {
       task.mancount = mancount.val();
     })
   });
-  gantt.attachEvent("onTaskClick", function(id,e){
-    window.console.log(gantt.getTask(id));
-    return true;
-  });
+  
+  
 	gantt.attachEvent("onTaskLoading", function(task){
 		if(task.deadline){
       task.deadline = gantt.date.parseDate(task.deadline, "xml_date");
@@ -73,15 +79,11 @@ $(document).ready(function() {
       task.deadline = task.end_date;
     }
     if(task.type == "resource"){
-      task.resource_type = opt_resource[task.resource_type] ? opt_resource[task.resource_type] : opt_resource[0].label;
+      task.resource_type = resource_type[task.resource_type] ? resource_type[task.resource_type] : resource_type[0];
     }     
 		return true;
 	});
-  gantt.attachEvent("onLightboxSave", function(id, task, is_new){
-    //any custom logic here
-    window.console.log(gantt.getLightboxValues());
-    return true;
-})
+
   //Filter
   gantt.attachEvent("onBeforeTaskDisplay", function(id, task){
 
@@ -103,7 +105,7 @@ $(document).ready(function() {
   gantt.init("gantt_here");
 //  gantt.parse(project);
 //  gantt.parse(project5, "json");
-  gantt.parse(project4);
+  gantt.parse(project);
   
 
   //Events
