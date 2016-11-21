@@ -18,7 +18,6 @@ $(document).ready(function() {
     task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getHours(task) + ">";
     task.manhours_template = "<input type='number' class='manhours'  step='0.1'  value=" + getManHours(task) + ">";
     task.mancount_template = "<input type='number' class='mancount'  step='0.1'  value=" + getManCount(task) + ">";
- 
     return true
   }); 
     
@@ -28,7 +27,6 @@ $(document).ready(function() {
     
     var node_hours = gantt.getLightboxSection('hours').node
     var hours = $(node_hours).find('input');
-    
     var node_manhours = gantt.getLightboxSection('manhours').node
     var manhours = $(node_manhours).find('input');
 
@@ -71,7 +69,6 @@ $(document).ready(function() {
     })
   });
   
-  
 	gantt.attachEvent("onTaskLoading", function(task){
 		if(task.deadline){
       task.deadline = gantt.date.parseDate(task.deadline, "xml_date");
@@ -103,10 +100,15 @@ $(document).ready(function() {
 
 
   gantt.init("gantt_here");
-//  gantt.parse(project);
+//  gantt.parse(project4);
 //  gantt.parse(project5, "json");
-  gantt.parse(project);
-  
+//  gantt.parse(project);
+  gantt.load("../app/connector.php");
+
+
+//  var dp = new gantt.dataProcessor("/app/connector.php");
+//  dp.init(gantt);
+
 
   //Events
   $('#criticalPath').on('click', function(){
