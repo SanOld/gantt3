@@ -44,6 +44,9 @@ html, body{
 .type{
   font-size: 10px;
 }
+.footer{
+   display: none;
+}
 
 
 .deadline {
@@ -77,8 +80,6 @@ html, body{
 
 #gantt_here {
 flex: 1 0 auto;
-  /*height: 80% !important;*/
-  margin-bottom: 18px;
 }
 .gantt_container {
  height: 100% ;
