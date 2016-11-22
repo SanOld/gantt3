@@ -1,6 +1,6 @@
 <?php //
 
-if(isset($_GET['project'])){
+if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
   $project = $_GET['project'];
 } else {
   $project = "undefined";

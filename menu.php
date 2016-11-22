@@ -11,31 +11,28 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Basic Gantt Chart</a>
+                <a class="navbar-brand" href="#">CAD5D. Календарное планирование</a>
               </div>
               <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Project <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Проект <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Project information</a></li>
-                      <li><a href="#">Custom fields</a></li>
-                      <li><a href="#">Change working time</a></li>
+                      <li><a href="#">Инфомация</a></li>
+                      <li><a href="#">Настройка</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Export</a></li>
+                      <li><a href="#">Экспорт в PDF</a></li>
                     </ul>
                   </li>
                   <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Task <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Задача <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
-                      <li><a href="#">Add task</a></li>
-                      <li><a href="#">Add milestone</a></li>
+                      <li><a href="#">Добавить задачу</a></li>
+                      <li><a href="#">Добавить ресурс</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Summary</a></li>
+                      <li><a href="#">Настройка</a></li>
                     </ul>
                   </li>
-                  <li><a href="#">Team</a></li>
-                  <li><a href="#" class="save">Save project</a></li>
                 </ul>
               </div>
             </div>

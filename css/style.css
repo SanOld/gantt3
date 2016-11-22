@@ -1,12 +1,11 @@
 html, body{
-    margin:0px;
-    padding:0px;
-    height:100%;
-    overflow:hidden;
+  display: flex;
+  flex-direction: column;
+  margin:0px;
+  padding:0px;
+  height:100%;
+  overflow:hidden;
 }
-/*#gantt_here{
-  overflow-x: scroll;
-}*/
     
 /* hide progress drag in projects and objectives */
 .task .gantt_task_progress_drag,
@@ -74,6 +73,27 @@ html, body{
   line-height: 25px;
   text-align: center;
   font-size: 24px;
+}
+
+#gantt_here {
+flex: 1 0 auto;
+  /*height: 80% !important;*/
+  margin-bottom: 18px;
+}
+.gantt_container {
+ height: 100% ;
+   margin-bottom: 18px;
+}
+.gantt_hor_scroll {
+
+flex: 0 0 auto;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+
+  overflow-x: scroll;
+  overflow-y: hidden;
 }
 
 
