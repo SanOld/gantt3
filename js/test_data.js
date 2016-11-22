@@ -20,6 +20,7 @@ var project4 = {
         {id:5, source:5, target:6, type:"0"}
     ]
 };
+
 var project5 = {
    "data":[
       {
@@ -112,7 +113,22 @@ var project5 = {
       ]
    }
 };
-
+var project6 = {
+   "data":[
+      {
+         "id":"1",
+         "start_date":"2013-04-01 00:00:00",
+         "duration":"5",
+         "text":"Project #1",
+         "progress":"0.8",
+         "parent":"0",
+         "deadline":"2013-04-09 00:00:00",
+         "planned_start":"2013-04-01 00:00:00",
+         "planned_end":"2013-04-07 00:00:00",
+         "open":1
+      }
+    ]
+  }
 var project1 = {
 
   data: [

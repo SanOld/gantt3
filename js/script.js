@@ -76,7 +76,7 @@ $(document).ready(function() {
       task.deadline = task.end_date;
     }
     if(task.type == "resource"){
-      task.resource_type = resource_type[task.resource_type] ? resource_type[task.resource_type] : resource_type[0];
+      task.resource_type = task.resource_type ? task.resource_type : "Материал";;
     }     
 		return true;
 	});
@@ -98,17 +98,20 @@ $(document).ready(function() {
   });
 
 
-
   gantt.init("gantt_here");
-//  gantt.parse(project4);
+//  gantt.parse(project5, "json");
 //  gantt.parse(project5, "json");
 //  gantt.parse(project);
-  gantt.load("../app/connector.php");
+//  gantt.load("../app/data.php");
 
-
-//  var dp = new gantt.dataProcessor("/app/connector.php");
-//  dp.init(gantt);
-
+  if(project != undefined){
+    gantt.load("../app/data.php?connector=true&dhx_filter[project_id]=" + project);    
+  } else {
+    gantt.load("../app/data.php");
+  }
+  var dp = new gantt.dataProcessor("../app/data.php");
+  dp.init(gantt);
+  
 
   //Events
   $('#criticalPath').on('click', function(){
@@ -186,6 +189,12 @@ $(document).ready(function() {
         break;
     }
     
+  });
+  
+  $('.save').on('click', function(){
+
+    dp.sendAllData();
+
   });
 
 //Utils

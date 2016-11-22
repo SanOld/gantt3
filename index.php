@@ -1,31 +1,20 @@
-<?php
-  if( $curl = curl_init() ) {
-    curl_setopt($curl, CURLOPT_URL, 'http://esoftdsc.bget.ru/smeta3007/loaders/get_smeta_json.php');
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($curl, CURLOPT_POST, true);
-    curl_setopt($curl, CURLOPT_POSTFIELDS, "project=".$_GET['project']);
-    $out = curl_exec($curl);
-    curl_close($curl);
-  }
-  
-//  print_r($_GET['$out']);
-//  die();
-  
-if($out){
-  $project = $out;
+<?php //
+
+if(isset($_GET['project'])){
+  $project = $_GET['project'];
 } else {
-  $project = json_encode('{"data":[{"id":1,"name":"Отсутствуют данные","text":"Отсутствуют данные", "start_date":"16.11.2016", "duration":"10","type":"task"}]}');
+  $project = "undefined";
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  
-<script>
-   var project = <?php echo($project); ?> 
-</script>
-
+ <script>
+   var project = <?php echo $project; ?>;
+   alert("project :" + project);
+ </script>
+ 
 <?php include('head.php'); ?>
 
 </head>

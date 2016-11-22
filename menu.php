@@ -35,7 +35,7 @@
                     </ul>
                   </li>
                   <li><a href="#">Team</a></li>
-                  <li><a href="#">Format</a></li>
+                  <li><a href="#" class="save">Save project</a></li>
                 </ul>
               </div>
             </div>

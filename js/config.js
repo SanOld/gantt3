@@ -4,7 +4,7 @@ var resource_type = ["Материал", "Оборудование", "Интср
 var opt_resource = []; //options resources type to lightbox
 var current_task = {};
 //  gantt.config.xml_date = "%d-%m-%Y";
-//gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";
+gantt.config.xml_date = "%Y-%m-%d %H:%i:%s";
 
 gantt.config.columns=[
 {name: "overdue", label: "", width: 38, template: function (obj) {
@@ -81,7 +81,7 @@ gantt.locale.labels.section_resource_type = "Тип ресурса";
 
 //options resources type to lightbox  
 for (var i in resource_type){
-  opt_resource.push({key:i, label :resource_type[i]});
+  opt_resource.push({key:resource_type[i], label :resource_type[i]});
 }
 //lightbox.sections
 gantt.config.lightbox.sections = [
@@ -194,11 +194,11 @@ function getTaskType(task){
   return "<i class='type'>" + text + "</i>";
 };
 function getResorceAmount(task){
-  return task.amount ? task.amount : "";
+  return task.resource_amount ? task.resource_amount : "";
 };
 function getResourceType(task){
   if(task.type == "resource"){
-    var text = resource_type[task.resource_type] ? resource_type[task.resource_type] : resource_type[0];
+    var text = task.resource_type ? task.resource_type : "";
     return "<i class='type'>" + text + "</i>";
   } 
   return "";

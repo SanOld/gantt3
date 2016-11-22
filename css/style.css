@@ -4,9 +4,9 @@ html, body{
     height:100%;
     overflow:hidden;
 }
-#gantt_here{
+/*#gantt_here{
   overflow-x: scroll;
-}
+}*/
     
 /* hide progress drag in projects and objectives */
 .task .gantt_task_progress_drag,
