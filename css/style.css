@@ -79,11 +79,11 @@ html, body{
 }
 
 #gantt_here {
-flex: 1 0 auto;
+  flex: 1 0 auto;
 }
 .gantt_container {
- height: 100% ;
-   margin-bottom: 18px;
+  height: 100% ;
+  margin-bottom: 18px;
 }
 .gantt_hor_scroll {
 

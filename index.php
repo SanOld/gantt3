@@ -12,7 +12,6 @@ if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
 <head>
  <script>
    var project = <?php echo $project; ?>;
-   alert("project :" + project);
  </script>
  
 <?php include('head.php'); ?>

@@ -20,6 +20,7 @@ function getTaskColumns() {
                        ,'deadline'
                        ,'type'
                        ,'resource_type'
+                       ,'resource_edizm'
                        ,'resource_amount'
                        ,'hours'
                        ,'manhours'

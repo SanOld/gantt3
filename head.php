@@ -25,7 +25,7 @@
 <script src="js/dhtmlxgantt_critical_path.js"></script>
 
 <script src="js/test_data.js"></script>
-<script src="js/config.js"></script>
+<!--<script src="js/config.js"></script>-->
 <script src="js/script.js"></script>
 
 
