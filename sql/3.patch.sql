@@ -7,5 +7,5 @@ CREATE TABLE `plan_payment` (
 )
 COLLATE='utf8_general_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=13
+AUTO_INCREMENT=1
 ;

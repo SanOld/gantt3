@@ -1,6 +1,7 @@
 <?php
  
-include('db.php');
+//include('db.php');
+include('db_library.php');
 include ('grid_connector.php');
 include ('db_pdo.php');
 

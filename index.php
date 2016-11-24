@@ -22,10 +22,7 @@ if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
   <?php include('menu.php'); ?>
   
 </div>
-  
-<div id="winVP"></div>
-  
-<div id="form_container" style="width:280px;height:250px;"></div>
+ 
   
 <div class="clearfix"></div>  
 <div id="gantt_here"></div>
