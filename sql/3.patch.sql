@@ -1,0 +1,11 @@
+CREATE TABLE `plan_payment` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`task_id` INT(11) NULL DEFAULT NULL,
+	`plan_date` DATE NULL DEFAULT NULL,
+	`plan_sum` FLOAT NULL DEFAULT NULL,
+	PRIMARY KEY (`id`)
+)
+COLLATE='utf8_general_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=13
+;

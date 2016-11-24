@@ -1,3 +1,75 @@
+
+function getFinanceEditor(taskId){
+  var task = gantt.getTask(taskId);
+  var taskId = taskId;
+  
+      var dhxWins, w1, myGrid;
+      var filter = false;
+      dhxWins = new dhtmlXWindows();
+//			dhxWins.attachViewportTo("winVP");
+      var width = 500;
+      var height = 500;
+      var left = ($(window).width() - width)/2;
+      var right = ($(window).height() - height)/2;
+      
+			w1 = dhxWins.createWindow('paymentPlan', left, right, width, height);
+      w1.setText("План оплат. " + task.text);
+//			w1.button("close").disable();
+      var myToolbar = w1.attachToolbar({
+				icons_path: "../imgs/",
+				xml: "../../xml/toolbars/task_finance_toolbar.xml"
+			});
+      myToolbar.attachEvent("onClick", function(id) {
+        switch (id) {
+        case "add":
+           myGrid.addRow(myGrid.uid(),[taskId,,],0);         
+          break;
+        case "delete":
+          myGrid.deleteRow(myGrid.getSelectedRowId())
+          break;
+      case "save":
+          myDataProcessor.sendAllData();
+          gantt.message({type:"error", text:"Данные сохранены!"});
+          break;  
+      case "search":
+          filter=!filter;
+          if(filter){
+            myGrid.attachHeader(",#text_filter,#text_filter");
+          } else {
+            myGrid.detachHeader(1);
+          }
+          myGrid.refresh();
+          break;  
+      }
+			});
+			//
+
+			myGrid = w1.attachGrid();
+			myGrid.setImagePath("../dhtmlxSuite_v50_std/codebase/imgs/");
+      
+      myGrid.setHeader("TaskId,Дата платежа,Сумма");
+//      myGrid.attachHeader(",#text_filter,#text_filter");
+			myGrid.setInitWidths("*,*");
+			myGrid.setColAlign("left,left");
+			myGrid.setColTypes("ro,dhxCalendarA,price");
+      myGrid.setColumnHidden(0,true); //hides the 1st column
+      myGrid.setDateFormat("%Y-%m-%d");
+      myGrid.setNumberFormat("0,000.00");
+      myGrid.setColSorting("str,date,int")
+
+      myGrid.init();
+      
+      myGrid.load("../app/dataGridFinance.php?connector=true&dhx_filter[task_id]=" + taskId);
+      
+      var myDataProcessor = new dataProcessor("../app/dataGridFinance.php?task_id=" + taskId); // lock feed url
+//      myDataProcessor.setTransactionMode("GET", false);
+      myDataProcessor.init(myGrid); // link dataprocessor to the grid
+
+    
+      
+};
+
+
 $(document).ready(function() {
 // gantt.message({text:val,expire:-1}); 
 var defaultValue = {
@@ -27,7 +99,8 @@ gantt.config.columns=[
     }
     return '<div></div>';
   }
-},    
+}, 
+//{name: "custom_menu", label: gantt.locale.labels.grid_menu, align: 'center', resize: false, width: 144, template: getCustomMenu, },
 {name: "text",       label: "Наименование",   tree:true, width:230, template:customTaskName},
 {name: "start_date", label: "Начало",         align: "center" },
 {name: "deadline",   label: "Крайний срок",   align: "center",  width: 90},
@@ -39,8 +112,8 @@ gantt.config.columns=[
 {name: "text",       label: "Ед.изм.",        align: "left",    width: 40,    template:getResourceUnit},
 {name: "text",       label: "Рабочие",        align: "center",  width: 60,    template:getManCount},
 {name: "text",       label: "Трудоемкость",   align: "center",  width: 80,    template:getManHours},
-
-{name:"add",          label:"",           width:44 },
+{name: "finance",    label: "",               align: 'center', resize: false, template:getFinanceTemplate, width: 45 },
+{name:"add",         label:"",           width:44 },
 ];
 
 gantt.config.types.task = "task";
@@ -67,13 +140,45 @@ gantt.templates.task_class = function (start, end, task) {
 
   return result;
 };
-
 gantt.templates.task_row_class = function(start_date, end_date, task) {
   if (task.type  == 'resource') return "green";
 }; 
-
 gantt.templates.grid_row_class = gantt.templates.task_class ;
+gantt.templates.task_cell_class = function(task, date){
+  if(!gantt.isWorkTime(date))
+    return "week_end";
+  return "";
+};
 
+function getCustomMenu(task) {
+	var html = templates.render('.user-custom-menu', {
+		id : task.id,
+	});
+	return html;
+}
+//function getCustomDeleteMenu(task) {
+//	var html = templates.render('.templates .user-custom-delete-menu', {
+//		id : task.id,
+//		user : task.user
+//	});
+//	return html;
+//}
+
+function getFinanceTemplate(task) {
+//	var html = templates.render('.templates .finance-button', {
+//		id : task.id,
+//	});
+//	return html;
+  var text="";
+   text+= "<div class='finance-button' task='{{- rc.id}}'>"
+   text+=    "<div class='gantt_options_menu' type='button'>"
+	 text+=			"<i class='fa fa-usd gantt_options_menu_edit'"
+   text+=      "onclick='getFinanceEditor(" + task.id + ")'></i>"
+	 text+=		"</div>"
+	 text+=	"</div>"
+   return text;
+  
+}
 gantt.config.preserve_scroll = true; 
 gantt.config.autosize = true;
 // ordering tasks only inside a branch
@@ -493,12 +598,6 @@ function getParam(task, val){
     
   });
   
-  $('.save').on('click', function(){
-
-    dp.sendAllData();
-
-  });
-
 //Utils
   function getDateAgo(date, days) {
     var new_date = new Date();
@@ -510,4 +609,39 @@ function getParam(task, val){
        script.src = url;
        document.getElementsByTagName('head')[0].appendChild(script);
    }
+   
+function templateRenders() {
+	function render(template, data) {
+		var tpl_status = false;
+		var params_status = false;
+		if (data) {
+			params_status = true;
+		}
+		if (template) {
+			tpl_status = true;
+		}
+		if (tpl_status == true) {
+			_.templateSettings = {
+				evaluate : /\{\{(.+?)\}\}/g,
+				interpolate : /\{\{=(.+?)\}\}/g,
+				escape : /\{\{-(.+?)\}\}/g
+			};
+			_.templateSettings.variable = "rc";
+			var tpl = _.template(jQuery(template).html());
+		}
+		return tpl(data);
+		if (tpl_status == true && params_status == true) {
+			return tpl(data);
+		} else {
+			return tpl(data);
+		}
+
+	}
+	return {
+		render : render
+	}
+}
+var templates = new templateRenders();
+
+
 });

@@ -6,6 +6,9 @@ html, body{
   height:100%;
   overflow:hidden;
 }
+.templates {
+    display: none;
+}
     
 /* hide progress drag in projects and objectives */
 .task .gantt_task_progress_drag,
@@ -98,4 +101,48 @@ flex: 0 0 auto;
 }
 
 
-	
+.gantt_task_cell.week_end{
+  background-color: #EFF5FD;
+}
+.gantt_task_row.gantt_selected .gantt_task_cell.week_end{
+  background-color: #F8EC9C;
+}
+
+div#winVP {
+			position: relative;
+			height: 350px;
+			border: 1px solid #dfdfdf;
+			margin: 10px;
+		}
+    
+    
+ .gantt_row .gantt_cell .gantt_options_menu .fa {
+    visibility: hidden;
+}
+
+.gantt_row:hover .gantt_cell .gantt_options_menu .fa {
+    visibility: visible;
+}
+
+	.fa{
+		cursor: pointer;
+		font-size: 14px;
+		text-align: center;
+		opacity: 0.2;
+		padding: 5px;
+	}
+	.fa:hover{
+		opacity: 1;
+	}
+	.fa-pencil{
+		color: #ffa011;
+	}
+	.fa-plus{
+		color: #328EA0;
+	}
+	.fa-times{
+		color: red;
+	}
+  .fa-usd{
+		color: red;
+	}

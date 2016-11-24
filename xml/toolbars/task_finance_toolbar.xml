@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<toolbar>
+	<item id="add"   type="button"   img="new.gif"  imgdis="new_dis.gif"  text="Добавить"  />
+	<item id="delete"   type="button"   img="close.gif" imgdis="close_dis.gif" text="Удалить" />
+	<item id="sep2"   type="separator"/>
+  <item id="save"   type="button"   img="save.gif"  imgdis="save_dis.gif"  text="Сохранить"  />
+  <item id="search"   type="button"   img="search.gif"  imgdis="search.gif"  text="Фильтр"  />
+  
+</toolbar>

@@ -30,7 +30,8 @@
                       <li><a href="#">Добавить задачу</a></li>
                       <li><a href="#">Добавить ресурс</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Настройка</a></li>
+                      <li><a  class="on">On</a></li>
+                      <li><a  class="off">Off</a></li>
                     </ul>
                   </li>
                 </ul>
