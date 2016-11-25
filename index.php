@@ -1,9 +1,15 @@
 <?php //
 
-if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
-  $project = $_GET['project'];
+if(isset($_GET['project_id']) && gettype($_GET['project_id']) == "string"){
+  $project_id= $_GET['project_id'];
 } else {
-  $project = "undefined";
+  $project_id = "undefined";
+}
+
+if(isset($_GET['$smeta_id']) && gettype($_GET['$smeta_id']) == "string"){
+  $smeta_id= $_GET['$smeta_id'];
+} else {
+  $smeta_id = "undefined";
 }
 
 ?>
@@ -11,7 +17,8 @@ if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
 <html lang="en">
 <head>
  <script>
-   var project = <?php echo $project; ?>;
+   var project_id = <?php echo $project_id; ?>;
+   var smeta_id = <?php echo $smeta_id; ?>;
  </script>
  
 <?php include('head.php'); ?>

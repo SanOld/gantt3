@@ -9,9 +9,10 @@ define('DB_PASSWORD', 'jr4gbdev'); //gantt_1
 define('DB_DATABASE', 'librar02_gantt'); //innakhx4_gantt
 
 /* TABLES */
-define('TBL_GANTT', 'gantt_tasks'); //innakhx4_gantt
+define('TBL_GANTT', 'user_smeta'); //innakhx4_gantt
+define('TBL_RESOURCE', 'resources2'); //innakhx4_gantt
 define('TBL_LINKS', 'gantt_links'); //innakhx4_gantt
-define('TBL_USERS', 'users'); //innakhx4_gantt
+define('TBL_PAYMENT', 'plan_payment'); //innakhx4_gantt
 
 // Mysql
 $dbtype = "MySQL";

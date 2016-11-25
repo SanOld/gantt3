@@ -1,7 +1,4 @@
 
-
-
-
 var dhxWins;
 function getFinanceEditor(taskId){
   var task = gantt.getTask(taskId);
@@ -40,21 +37,21 @@ function getFinanceEditor(taskId){
       myGrid.setColAlign("left,center,center");
       myGrid.enableAutoWidth(true);
 			
-			myGrid.setColTypes("ro,dhxCalendarA,price");
+			myGrid.setColTypes("ro,dhxCalendarA,edn");
       myGrid.setColumnHidden(0,true); //hides the 1st column
-      myGrid.setDateFormat("%Y-%m-%d");
+      myGrid.setDateFormat("%d-%m-%Y");
       myGrid.setNumberFormat("0,000.00");
       myGrid.setColSorting("str,date,int");
-myGrid._in_header_stat_sum=function(tag,index,data){       
-    var calck=function(){                              
-        var sum=0;                                     
-        this.forEachRow(function(id){                   
-            sum+=this.cellById(id,index).getValue()*1;     
-        })
-    return this._aplNF(sum,0);
-    }
-    this._stat_in_header(tag,calck,index,data);            
-}
+      myGrid._in_header_stat_sum=function(tag,index,data){       
+          var calck=function(){                              
+              var sum=0;                                     
+              this.forEachRow(function(id){                   
+                  sum+=this.cellById(id,index).getValue()*1;     
+              })
+          return this._aplNF(sum,0);
+          }
+          this._stat_in_header(tag,calck,index,data);            
+      }
       myGrid.attachFooter(",,Общая сумма: {#stat_total}");
       myGrid.init();
       
@@ -107,11 +104,25 @@ var defaultValue = {
   , mancount : 1
   , duration : 1
   , resource_amount : 1
-  , resource_edizm : "шт"
+  , ed_izm : "шт"
   , resource_type : "Материал"
 };
 
-
+ //========================
+  var filter_start;
+  var filter_end;
+  var filter_task_type = "";
+  
+  
+  var today = new Date();
+  var day = today.getDay();
+  var monday = getDateAgo(today,-day+1);
+  var sunday = getDateAgo(today, day+5);
+  filter_start = getDateAgo(today,-10000);
+  filter_end = getDateAgo(today,10000);
+  
+  include("/js/scale.js"); 
+  
 var resource_type = ["Материал", "Оборудование", "Интсрумент"]; // array resources type
 var opt_resource = []; //options resources type to lightbox
 var current_task = {};
@@ -131,7 +142,7 @@ gantt.config.columns=[
 }, 
 //{name: "custom_menu", label: gantt.locale.labels.grid_menu, align: 'center', resize: false, width: 144, template: getCustomMenu, },
 {name: "text",       label: "Наименование",   tree:true, width:230, template:customTaskName},
-{name: "start_date", label: "Начало",         align: "center" },
+{name: "start_date", label: "Начало",         align: "center",  width: 90},
 {name: "deadline",   label: "Крайний срок",   align: "center",  width: 90},
 {name: "duration",   label: "Длительность",   align: "center",  width: 80 },
 
@@ -208,6 +219,7 @@ function getFinanceTemplate(task) {
    return text;
   
 }
+
 gantt.config.preserve_scroll = true; 
 gantt.config.autosize = true;
 // ordering tasks only inside a branch
@@ -223,7 +235,7 @@ gantt.locale.labels.section_hours = "Кол-во часов в день";
 gantt.locale.labels.section_deadline = "Крайний срок";
 gantt.locale.labels.section_resource_type = "Тип ресурса";
 gantt.locale.labels.section_resource_amount = "Количество ресурса";
-gantt.locale.labels.section_resource_edizm = "Ед.изм.";
+gantt.locale.labels.section_ed_izm = "Ед.изм.";
 
 
 //options resources type to lightbox  
@@ -238,9 +250,9 @@ gantt.config.lightbox.sections = [
   ,{name: "mancount",         height:30, type:"template",   map_to:"mancount_template"}
   ,{name: "resource_type",    height:30, type:"select",     map_to:"resource_type", options: opt_resource}
   ,{name: "resource_amount",  height:30, type:"template",   map_to:"resource_amount_template"}
-  ,{name: "resource_edizm",   height:30, type:"template",   map_to:"resource_edizm_template"}
+  ,{name: "ed_izm",           height:30, type:"template",   map_to:"ed_izm_template"}
   ,{name: "time",             height:30, type:"duration",   map_to:"auto"}
-  ,{name: "deadline",                    type: "duration",  map_to: {start_date:"deadline"}, single_date: true}
+  ,{name: "deadline",                    type: "duration",  map_to: "deadline", single_date: true}
 ];
 
 
@@ -389,8 +401,8 @@ function getParam(task, val){
       case 'resource_amount':
         result = (param in task) ? task[param] : defaultValue.resource_amount;
         break;
-      case 'resource_edizm':
-        result = (param in task) ? task[param] : defaultValue.resource_edizm;
+      case 'ed_izm':
+        result = (param in task) ? task[param] : defaultValue.ed_izm;
         break;  
     }
   return result; 
@@ -418,10 +430,8 @@ function getParam(task, val){
     task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getParam(task, 'hours') + ">";
     task.manhours_template = "<input type='number' class='manhours'  step='0.1'  value=" + getParam(task, 'manhours') + ">";
     task.mancount_template = "<input type='number' class='mancount'  step='0.1'  value=" + getParam(task, 'mancount') + ">";
-    
     task.resource_amount_template = "<input type='number' class='mancount'  step='0.1'  value=" + getParam(task, 'resource_amount') + ">";
-    task.resource_edizm_template = "<input type='text' class='mancount'     value=" + getParam(task, 'resource_edizm') + ">";
-    
+    task.ed_izm_template = "<input type='text' class='mancount'     value=" + getParam(task, 'ed_izm') + ">";
     return true
   }); 
   gantt.attachEvent("onLightboxSave", function(id, item, is_new){
@@ -441,15 +451,15 @@ function getParam(task, val){
     var node_resource_amount = gantt.getLightboxSection('resource_amount').node;
     var new_resource_amount = $(node_resource_amount).find('input');
     
-    var node_resource_edizm = gantt.getLightboxSection('resource_edizm').node;
-    var new_resource_edizm = $(node_resource_edizm).find('select');
+    var node_ed_izm = gantt.getLightboxSection('ed_izm').node;
+    var new_ed_izm = $(node_ed_izm).find('select');
      
     item.hours = hours.val();
     item.manhours = manhours.val();
     item.mancount = mancount.val();
     item.duration = new_duration.val();
     item.resource_amount = new_resource_amount.val();
-    item.resource_edizm = new_resource_edizm.val();
+    item.ed_izm = new_ed_izm.val();
     return true;
 	});
   gantt.attachEvent("onLightbox", function (task_id){
@@ -498,18 +508,35 @@ function getParam(task, val){
     })
   });
 	gantt.attachEvent("onTaskLoading", function(task){
-		if("deadline" in task){
-      task.deadline = gantt.date.parseDate(task.deadline, "xml_date");
+
+		if("start_date" in task){
+      task.start_date = (Math.abs(task.start_date-today) < 946080000 && (task.start_date != undefined)) ? task.start_date : gantt.date.parseDate(today,"xml_date");
+
     } else {
-      task.deadline = task.end_date;
+      task.start_date = gantt.date.parseDate(today,"xml_date");
     }
+
+    if("duration" in task){
+      task.duration = ((+task.duration != 0) && (task.duration != undefined)) ? task.duration : +defaultValue.duration;
+      task.end_date = gantt.date.add(task.start_date, +task.duration,'day');
+    } else {
+      task.duration = +defaultValue.duration;
+      task.end_date = gantt.date.add(task.start_date, +task.duration,'day');
+    }
+
+		if("deadline" in task){
+      task.deadline = ((+task.deadline != 0) && (task.deadline != undefined)) ? gantt.date.parseDate(task.deadline, "xml_date") : task.deadline = gantt.date.add(task.start_date, +task.duration,'day');
+    } else {
+      task.deadline = gantt.date.add(task.start_date, +task.duration,'day');
+    }  
+    
     task.resource_type = ("resource_type" in task) ? task.resource_type : defaultValue.resource_type;
     task.hours = ("hours" in task) ? task.hours : defaultValue.hours;
-    task.manhours = ("manhours" in task) ? task.manhours : defaultValue.manhours;
+    task.manhours = ("workload" in task) ? task.workload : defaultValue.manhours;
     task.mancount = ("mancount" in task) ? task.mancount : defaultValue.mancount;
-    task.duration = ("duration" in task) ? task.duration : defaultValue.duration;
     task.resource_amount = ("resource_amount" in task) ? task.resource_amount : defaultValue.resource_amount;
-    task.resource_edizm = ("resource_edizm" in task) ? task.resource_edizm : defaultValue.resource_edizm;
+    task.ed_izm = ("ed_izm" in task) ? task.ed_izm : defaultValue.ed_izm;
+    window.console.log(task.start_date-today);
 		return true;
 	});
   //Filter
@@ -532,22 +559,31 @@ function getParam(task, val){
 
   //Init
   gantt.init("gantt_here");
+
 //  gantt.parse(project5, "json");
 //  gantt.parse(project5, "json");
-//  gantt.parse(project);
+//  gantt.parse(project_id);
 //  gantt.load("../app/data.php");
 
-  if(project != undefined){
-    gantt.message({text:"Проект :" + project,type:"default",expire:-1});
-    gantt.load("../app/data.php?connector=true&dhx_filter[project_id]=" + project);    
+  if(typeof project_id != 'undefined' || typeof smeta_id != 'undefined'){
+    gantt.message({text:"Проект :" + project_id,type:"default",expire:-1});
+    gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + smeta_id);
+    gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + smeta_id); 
   } else {
-    gantt.message({text:"Данные проекта отсуствуют",type:"error",expire:-1});
-    gantt.load("../app/data.php");
+    gantt.message({text:"Данные проекта отсуствуют ",type:"error",expire:-1});
+//    gantt.load("../app/dataGantTask.php");
   }
-  var dp = new gantt.dataProcessor("../app/data.php");
-  dp.init(gantt);
   
+  
+  var dp = new gantt.dataProcessor("../app/dataGantProcessor.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + smeta_id); 
+  dp.init(gantt);
+//
+    dp.attachEvent("onBeforeUpdate", function (id, status, data) {
 
+      window.console.log(data);
+       data.workload = data.manhours;
+       return true;
+  });
 
   //Events
   $('#criticalPath').on('click', function(){

@@ -31,6 +31,7 @@
 
 <script src="js/test_data.js"></script>
 <script src="js/utils/underscore.js"></script>
+<!--<script src="js/config.js"></script>-->
 <script src="js/script.js"></script>
 
 
