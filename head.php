@@ -30,6 +30,8 @@
 
 <script src="js/api.js"></script>
 <script src="js/dhtmlxgantt_critical_path.js"></script>
+<script src="js/redefine_dhtmlxGantt.js"></script>
+
 
 <script src="js/test_data.js"></script>
 <script src="js/utils/underscore.js"></script>

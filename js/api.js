@@ -526,8 +526,8 @@ gantt.copy_object_base = function(obj){
 }
 
 add_export_methods(gantt);
-if (window.Gantt && Gantt.plugin)
-	Gantt.plugin(add_export_methods);
+if (window.gantt && gantt.plugin)
+	gantt.plugin(add_export_methods);
 
 })();
 
@@ -841,8 +841,8 @@ if (window.Gantt && Gantt.plugin)
 	}
 
 	add_export_methods(gantt);
-	if (window.Gantt && Gantt.plugin)
-		Gantt.plugin(add_export_methods);
+	if (window.gantt && gantt.plugin)
+		gantt.plugin(add_export_methods);
 
 })();
 

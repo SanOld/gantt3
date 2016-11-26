@@ -109,6 +109,7 @@ var defaultValue = {
   , resource_type : "Материал"
 };
 
+
  //========================
   var filter_start;
   var filter_end;
@@ -157,7 +158,8 @@ gantt.config.columns=[
 {name: "finance",    label: "",               align: 'center', resize: false, template:getFinanceTemplate, width: 45 },
 {name:"add",         label:"",           width:44 },
 ];
-
+columns_template = gantt._serialize_columns(gantt.config);
+  window.console.log(columns_template);
 gantt.config.types.task = "task";
 gantt.config.types.resource = "resource";
 
@@ -567,11 +569,13 @@ function getParam(task, val){
         gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
       });
     }
-    
-  if(typeof project_id != 'undefined' || typeof smeta != 'undefined'){
+    gantt.message({text:project_id,type:"error",expire:-1});
+  if(project_id != undefined){
     gantt.message({text:"Проект :" + project_id,type:"default",expire:-1});
   } else {
     gantt.message({text:"Данные проекта отсутствуют ",type:"error",expire:-1});
+    gantt.message({text:"Загрузка примера ",type:"error",expire:-1});
+    gantt.parse(project5, "json");
   }
   
   gantt.message({text:"Режим :" + env,type:"error",expire:-1});

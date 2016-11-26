@@ -1,5 +1,5 @@
 <?php
-define('ENV', 'dev'); //prod or dev
+define('ENV', 'prod'); //prod or dev
 
 switch ( ENV ) {
   case 'prod':
