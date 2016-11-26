@@ -563,7 +563,7 @@ function getParam(task, val){
     gantt.parse(header);
     smeta.forEach(function(item, i, smeta) {
       gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
-      gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i); 
+      gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
     });
   if(typeof project_id != 'undefined' || typeof smeta != 'undefined'){
     gantt.message({text:"Проект :" + project_id,type:"default",expire:-1});
@@ -575,7 +575,8 @@ function getParam(task, val){
   }
   
   
-  var dp = new gantt.dataProcessor("../app/dataGantProcessor.php?connector=true&dhx_filter[project_id]=" + 57 + "&dhx_filter[smeta_id]=" + 56); 
+  var dp = new gantt.dataProcessor("../app/dataGantProcessor.php"); 
+//  ?connector=true&dhx_filter[project_id]=" + 57 + "&dhx_filter[smeta_id]=" + 56
   dp.init(gantt);
 //
     dp.attachEvent("onBeforeUpdate", function (id, status, data) {
