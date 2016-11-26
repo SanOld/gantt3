@@ -556,25 +556,25 @@ function getParam(task, val){
 //  gantt.load("../app/data.php");
 
     var header = {data:[]};
-    header.data[0] = {id:project_id, text:project, start_date:"13-11-2016", duration:1, open: true, type: "project"},
-    smeta.forEach(function(item, i, smeta) {
-      header.data.push({id:i, text:item, start_date:"13-11-2016", duration:1, open: true, type: "smeta", parent: project_id})
-    });
-    gantt.parse(header);
-    smeta.forEach(function(item, i, smeta) {
-      gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
-      gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
-    });
+    header.data[0] = {id:project_id, text:project, start_date:"13-11-2016", duration:1, open: true, type: "project"};
+    if(smeta.lenght > 0){
+      smeta.forEach(function(item, i, smeta) {
+        header.data.push({id:i, text:item, start_date:"13-11-2016", duration:1, open: true, type: "smeta", parent: project_id})
+      });
+      gantt.parse(header);
+      smeta.forEach(function(item, i, smeta) {
+        gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
+        gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
+      });
+    }
+    
   if(typeof project_id != 'undefined' || typeof smeta != 'undefined'){
     gantt.message({text:"Проект :" + project_id,type:"default",expire:-1});
-
-
   } else {
     gantt.message({text:"Данные проекта отсутствуют ",type:"error",expire:-1});
-//    gantt.load("../app/dataGantTask.php");
   }
   
-  
+  gantt.message({text:"Режим :" + env,type:"error",expire:-1});
   var dp = new gantt.dataProcessor("../app/dataGantProcessor.php"); 
 //  ?connector=true&dhx_filter[project_id]=" + 57 + "&dhx_filter[smeta_id]=" + 56
   dp.init(gantt);
@@ -684,7 +684,6 @@ function getParam(task, val){
        var script = document.createElement('script');
        script.src = url;
        document.getElementsByTagName('body')[0].appendChild(script);
-       window.console.log(document.getElementsByTagName('body'));
    }
    
 function templateRenders() {

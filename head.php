@@ -7,8 +7,7 @@
 <base href="/">
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 <link href="css/bootstrap.css" rel="stylesheet">
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href="dhtmlxSuite_v50_std/codebase/dhtmlx.css" rel="stylesheet">
 <link href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">
 
