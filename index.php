@@ -13,7 +13,7 @@ if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
 }
 
 if(isset($_GET['smeta']) ){
-  $smeta= $_GET['smeta'];
+  $smeta= json_encode($_GET['smeta']);
 } else {
   $smeta = [];
 }
@@ -24,18 +24,14 @@ if(isset($_GET['smeta']) ){
 <head>
  <script>
    var project_id = <?php echo $project_id; ?>;
-   var project = <?php echo $project; ?>;
-   var smeta = [];
-   smeta = <?php echo $smeta; ?>;
+   var project = "<?php echo $project; ?>";
+//   var smeta = {};
+   smeta = <?php echo($smeta); ?>;
    var env = '<?php echo ENV; ?>';
-//   smeta = [];
-//   project_id = 57;
-//   project = "Первый";
-//   smeta['53'] = "Смета тест1"
-//   smeta['58'] = "Смета тест2"
-//   smeta['59'] = "Смета тест3"
+
+
  </script>
- 
+
 <?php include('head.php'); ?>
 
 </head>

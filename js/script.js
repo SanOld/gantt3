@@ -109,7 +109,6 @@ var defaultValue = {
   , resource_type : "Материал"
 };
 
-
  //========================
   var filter_start;
   var filter_end;
@@ -158,8 +157,7 @@ gantt.config.columns=[
 {name: "finance",    label: "",               align: 'center', resize: false, template:getFinanceTemplate, width: 45 },
 {name:"add",         label:"",           width:44 },
 ];
-columns_template = gantt._serialize_columns(gantt.config);
-  window.console.log(columns_template);
+
 gantt.config.types.task = "task";
 gantt.config.types.resource = "resource";
 
@@ -558,18 +556,19 @@ function getParam(task, val){
 //  gantt.load("../app/data.php");
 
     var header = {data:[]};
-    header.data[0] = {id:project_id, text:project, start_date:"13-11-2016", duration:1, open: true, type: "project"};
-    if(smeta.lenght > 0){
-      smeta.forEach(function(item, i, smeta) {
-        header.data.push({id:i, text:item, start_date:"13-11-2016", duration:1, open: true, type: "smeta", parent: project_id})
-      });
+    header.data.push({id:project_id, text:project, start_date:"2016-11-25 00:00:00", duration:1, open: true, type: "project"});
+
+      for(var i in smeta) {
+        header.data.push({id:i, text:smeta[i], start_date:"2016-11-25 00:00:00", duration:1, open: true, type: "smeta", parent: project_id})
+      };
       gantt.parse(header);
-      smeta.forEach(function(item, i, smeta) {
+      
+       for(var i in smeta) {
         gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
         gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
-      });
-    }
-    gantt.message({text:project_id,type:"error",expire:-1});
+      };
+
+
   if(project_id != undefined){
     gantt.message({text:"Проект :" + project_id,type:"default",expire:-1});
   } else {
