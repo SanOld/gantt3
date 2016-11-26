@@ -24,8 +24,11 @@
 <!--<script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>-->
 
 <script src="dhtmlxSuite_v50_std/codebase/dhtmlx.js"></script>
-<!--<script src="dhtmlxSuite_v50_std/codebase/dhtmlx_deprecated.js"></script>-->
+
 <script src="dhtmlxGantt_v4.1.0/codebase/sources/dhtmlxgantt.js"></script>
+
+<script src="dhtmlxSuite_v50_std/codebase/dhtmlx_deprecated.js"></script>
+
 <script src="js/api.js"></script>
 <script src="js/dhtmlxgantt_critical_path.js"></script>
 

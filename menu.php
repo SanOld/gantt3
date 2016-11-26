@@ -90,6 +90,17 @@
           </div>
         </div>
         <div class="col-lg-2 m-t-10 m-b-10">
+          <div class="input-group">
+            <label >Таблица задач</label>
+            <div class="input-group">
+<!--            <span class="input-group-addon">
+              <input id="criticalPath" type="checkbox" checked>
+            </span>-->
+            <input id="hideGrid" type="batton" class="form-control show-path" value="Скрыть" readonly> 
+            </div>
+          </div>
+        </div> 
+        <div class="col-lg-2 m-t-10 m-b-10">
 
         </div>
         

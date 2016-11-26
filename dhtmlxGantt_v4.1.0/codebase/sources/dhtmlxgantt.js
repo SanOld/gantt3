@@ -1034,6 +1034,16 @@ gantt._calc_grid_width = function () {
 
 	for (var i = 0; i < columns.length; i++) {
 		var v = parseInt(columns[i].width, 10);
+    //дополнил 26.11.2016
+    if(columns[i].hide){
+      v = 0;
+      columns[i].old_width = columns[i].width;
+      columns[i].width = 0;
+    } else {
+      columns[i].old_width = ('old_width' in columns[i]) ? columns[i].old_width : columns[i].width;
+      columns[i].width = columns[i].old_width;
+    }
+    //дополнил 26.11.2016
 		if (window.isNaN(v)) {
 			v = 50;
 			unknown.push(i);

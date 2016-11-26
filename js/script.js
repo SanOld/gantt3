@@ -33,13 +33,14 @@ function getFinanceEditor(taskId){
       myGrid.setHeader("TaskId,Дата платежа,Сумма");
 
 //      myGrid.attachHeader(",#text_filter,#text_filter");
-			myGrid.setInitWidths("0,*,100");
-      myGrid.setColAlign("left,center,center");
+			myGrid.setInitWidths("0,*,*");
+      myGrid.set
+      myGrid.setColAlign("center,center,center");
       myGrid.enableAutoWidth(true);
 			
 			myGrid.setColTypes("ro,dhxCalendarA,edn");
       myGrid.setColumnHidden(0,true); //hides the 1st column
-      myGrid.setDateFormat("%d-%m-%Y");
+      myGrid.setDateFormat("%Y-%m-%d");
       myGrid.setNumberFormat("0,000.00");
       myGrid.setColSorting("str,date,int");
       myGrid._in_header_stat_sum=function(tag,index,data){       
@@ -122,6 +123,7 @@ var defaultValue = {
   filter_end = getDateAgo(today,10000);
   
   include("/js/scale.js"); 
+  include("/js/contex_menu.js");
   
 var resource_type = ["Материал", "Оборудование", "Интсрумент"]; // array resources type
 var opt_resource = []; //options resources type to lightbox
@@ -146,12 +148,12 @@ gantt.config.columns=[
 {name: "deadline",   label: "Крайний срок",   align: "center",  width: 90},
 {name: "duration",   label: "Длительность",   align: "center",  width: 80 },
 
-{name: "text",       label: "Тип",            align: "center",  width: 40,    template:getTaskType},
-{name: "text",       label: "Тип ресурса",    align: "center",  width: 80,    template:getResourceType},
-{name: "text",       label: "Кол-во",         align: "right",   width: 60,    template:getResorceAmount},
-{name: "text",       label: "Ед.изм.",        align: "left",    width: 40,    template:getResourceUnit},
-{name: "text",       label: "Рабочие",        align: "center",  width: 60,    template:getManCount},
-{name: "text",       label: "Трудоемкость",   align: "center",  width: 80,    template:getManHours},
+{name: "type",       label: "Тип",            align: "center",  width: 40,    template:getTaskType},
+{name: "resource_type",       label: "Тип ресурса",    align: "center",  width: 80,    template:getResourceType},
+{name: "amount",       label: "Кол-во",         align: "right",   width: 60,    template:getResorceAmount},
+{name: "unit",       label: "Ед.изм.",        align: "left",    width: 40,    template:getResourceUnit},
+{name: "mancount",       label: "Рабочие",        align: "center",  width: 60,    template:getManCount},
+{name: "anhours",       label: "Трудоемкость",   align: "center",  width: 80,    template:getManHours},
 {name: "finance",    label: "",               align: 'center', resize: false, template:getFinanceTemplate, width: 45 },
 {name:"add",         label:"",           width:44 },
 ];
@@ -412,19 +414,6 @@ function getParam(task, val){
  //========================
  //========================
  //========================
-  var filter_start;
-  var filter_end;
-  var filter_task_type = "";
-
-  var today = new Date();
-  var day = today.getDay();
-  var monday = getDateAgo(today,-day+1);
-  var sunday = getDateAgo(today, day+5);
-  filter_start = getDateAgo(today,-10000);
-  filter_end = getDateAgo(today,10000);
-  
-  include("/js/scale.js");
-
   gantt.attachEvent("onBeforeLightbox", function(id) { 
     var task = current_task = gantt.getTask(id);
     task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getParam(task, 'hours') + ">";
@@ -536,7 +525,8 @@ function getParam(task, val){
     task.mancount = ("mancount" in task) ? task.mancount : defaultValue.mancount;
     task.resource_amount = ("resource_amount" in task) ? task.resource_amount : defaultValue.resource_amount;
     task.ed_izm = ("ed_izm" in task) ? task.ed_izm : defaultValue.ed_izm;
-    window.console.log(task.start_date-today);
+    task.parent = ("parent" in task) && +task.parent != 0 ? task.parent : task.smeta_id;
+//    window.console.log(task.start_date-today);
 		return true;
 	});
   //Filter
@@ -556,7 +546,7 @@ function getParam(task, val){
   });
 
 
-
+//gantt.config.show_grid = false;
   //Init
   gantt.init("gantt_here");
 
@@ -565,22 +555,31 @@ function getParam(task, val){
 //  gantt.parse(project_id);
 //  gantt.load("../app/data.php");
 
-  if(typeof project_id != 'undefined' || typeof smeta_id != 'undefined'){
+    var header = {data:[]};
+    header.data[0] = {id:project_id, text:project, start_date:"13-11-2016", duration:1, open: true, type: "project"},
+    smeta.forEach(function(item, i, smeta) {
+      header.data.push({id:i, text:item, start_date:"13-11-2016", duration:1, open: true, type: "smeta", parent: project_id})
+    });
+    gantt.parse(header);
+    smeta.forEach(function(item, i, smeta) {
+      gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
+      gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i); 
+    });
+  if(typeof project_id != 'undefined' || typeof smeta != 'undefined'){
     gantt.message({text:"Проект :" + project_id,type:"default",expire:-1});
-    gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + smeta_id);
-    gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + smeta_id); 
+
+
   } else {
-    gantt.message({text:"Данные проекта отсуствуют ",type:"error",expire:-1});
+    gantt.message({text:"Данные проекта отсутствуют ",type:"error",expire:-1});
 //    gantt.load("../app/dataGantTask.php");
   }
   
   
-  var dp = new gantt.dataProcessor("../app/dataGantProcessor.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + smeta_id); 
+  var dp = new gantt.dataProcessor("../app/dataGantProcessor.php?connector=true&dhx_filter[project_id]=" + 57 + "&dhx_filter[smeta_id]=" + 56); 
   dp.init(gantt);
 //
     dp.attachEvent("onBeforeUpdate", function (id, status, data) {
-
-      window.console.log(data);
+//      window.console.log(data);
        data.workload = data.manhours;
        return true;
   });
@@ -593,6 +592,17 @@ function getParam(task, val){
         $(this).val("Скрыть");
       }else{
         gantt.config.highlight_critical_path = false;
+        $(this).val("Отобразить");
+      }
+      gantt.render();   
+  })
+    $('#hideGrid').on('click', function(){
+      gantt.config.show_grid = !gantt.config.show_grid;
+      if(gantt.config.show_grid){
+        gantt.config.show_grid = true;
+        $(this).val("Скрыть");
+      }else{
+        gantt.config.show_grid = false;
         $(this).val("Отобразить");
       }
       gantt.render();   
@@ -672,7 +682,8 @@ function getParam(task, val){
   function include(url) {
        var script = document.createElement('script');
        script.src = url;
-       document.getElementsByTagName('head')[0].appendChild(script);
+       document.getElementsByTagName('body')[0].appendChild(script);
+       window.console.log(document.getElementsByTagName('body'));
    }
    
 function templateRenders() {
@@ -707,6 +718,7 @@ function templateRenders() {
 	}
 }
 var templates = new templateRenders();
+
 
 
 });

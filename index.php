@@ -1,15 +1,21 @@
 <?php //
 
 if(isset($_GET['project_id']) && gettype($_GET['project_id']) == "string"){
-  $project_id= $_GET['project_id'];
+  $project_id = $_GET['project_id'];
 } else {
   $project_id = "undefined";
 }
 
-if(isset($_GET['$smeta_id']) && gettype($_GET['$smeta_id']) == "string"){
-  $smeta_id= $_GET['$smeta_id'];
+if(isset($_GET['project']) && gettype($_GET['project']) == "string"){
+  $project= $_GET['project'];
 } else {
-  $smeta_id = "undefined";
+  $project = "undefined";
+}
+
+if(isset($_GET['smeta']) ){
+  $smeta= $_GET['smeta'];
+} else {
+  $smeta = "undefined";
 }
 
 ?>
@@ -18,7 +24,15 @@ if(isset($_GET['$smeta_id']) && gettype($_GET['$smeta_id']) == "string"){
 <head>
  <script>
    var project_id = <?php echo $project_id; ?>;
-   var smeta_id = <?php echo $smeta_id; ?>;
+   var project = <?php echo $project; ?>;
+   var smeta = [];
+   smeta = <?php echo $smeta; ?>;
+   var smeta = [];
+   project_id = 57;
+   project = "Первый";
+   smeta['53'] = "Смета тест1"
+   smeta['58'] = "Смета тест2"
+   smeta['59'] = "Смета тест3"
  </script>
  
 <?php include('head.php'); ?>
