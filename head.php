@@ -15,28 +15,22 @@
 <link href="css/helper.css" rel="stylesheet">
 <link href="css/style.css" rel="stylesheet">
 
-
-
-<script src="js/jquery-latest.js"></script>
-<script src="js/jquery-ui-latest.js"></script>
-<script src="js/bootstrap.min.js"></script>
-<!--<script src="http://code.jquery.com/jquery-1.7.1.min.js" type="text/javascript" charset="utf-8"></script>-->
+<script src="js/lib/jquery-latest.js"></script>
+<script src="js/lib/jquery-ui-latest.js"></script>
+<script src="js/lib/bootstrap.min.js"></script>
 
 <script src="dhtmlxSuite_v50_std/codebase/dhtmlx.js"></script>
-
 <script src="dhtmlxGantt_v4.1.0/codebase/sources/dhtmlxgantt.js"></script>
-
 <script src="dhtmlxSuite_v50_std/codebase/dhtmlx_deprecated.js"></script>
 
-<script src="js/api.js"></script>
-<script src="js/dhtmlxgantt_critical_path.js"></script>
-<script src="js/redefine_dhtmlxGantt.js"></script>
+<script src="js/lib/api.js"></script>
+<script src="js/lib/dhtmlxgantt_critical_path.js"></script>
+<script src="js/lib/redefine_dhtmlxGantt.js"></script>
 
 
 <script src="js/test_data.js"></script>
 <script src="js/utils/underscore.js"></script>
-<!--<script src="js/config.js"></script>-->
-<script src="js/script.js"></script>
+<script src="js/init.js"></script>
 
 
 

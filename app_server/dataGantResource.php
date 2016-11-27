@@ -14,7 +14,7 @@ function getTaskColumns() {
                        ,'name'
                        ,'parent'
                        ,'progress'
-                       ,'parent'
+                       ,'nomencl_id'
                        ,'project_id'
                        ,'smeta_id'
                        ,'deadline'
@@ -23,16 +23,15 @@ function getTaskColumns() {
                        ,'ed_izm'
                        ,'resource_amount'
                        ,'hours'
-                       ,'workload'
                        ,'mancount'
                        ,'description'
-                       ,'progress'
                        ,'sortorder'
                     );
 	return implode ( ',', $columns );
 }
 
 $gantt->mix("open", 1);
+
 $gantt->render_table(TBL_RESOURCE,"id",getTaskColumns(),"" );
 
 ?>

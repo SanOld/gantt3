@@ -23,7 +23,7 @@ if(isset($_GET['smeta']) ){
 <html lang="en">
 <head>
  <script>
-   var project_id = <?php echo $project_id; ?>;
+   var project_id = "<?php echo $project_id; ?>";
    var project = "<?php echo $project; ?>";
 //   var smeta = {};
    smeta = <?php echo($smeta); ?>;

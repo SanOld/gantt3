@@ -1,5 +1,5 @@
 
-  function setScaleConfig(value){
+function setScaleConfig(value){
   switch (value) {
     case "1":
       gantt.config.scale_unit = "day";
