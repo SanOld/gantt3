@@ -61,7 +61,8 @@ function filelist($dir){
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 <link href="dhtmlxSuite_v50_std/codebase/dhtmlx.css" rel="stylesheet">
-<link href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">
+<link id="skin" href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">
+<!--<link id="skin" href="css/dhtmlxgantt_broadway.css" rel="stylesheet">-->
 
 <!--<link href="css/font-awesome.css" rel="stylesheet">-->
 <link href="css/helper.css" rel="stylesheet">
