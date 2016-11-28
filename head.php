@@ -1,9 +1,9 @@
 <?php
-$dir1 = "./";
+$dir1 = "/js/";
 //
-//$files_array = dirlist($dir1);
-//$hash = md5(implode(':',$files_array)) || "";
-$hash = "";
+$files_array = dirlist($dir1);
+$hash = md5(implode(':',$files_array));
+
 // возвращает массив всех файлов директории вкл файлы пддиректорий
 function dirlist($dir){ 
   
@@ -82,7 +82,7 @@ function filelist($dir){
 <script src="js/test_data.js"></script>
 <script src="js/utils/underscore.js"></script>
 <script src="js/init.js?<?php echo $hash;?>"></script>
-<script> var hash = "<?php echo $hash;?>" </script>
+<script> var hash = "<?php echo $hash;?>"; </script>
 
 
 
