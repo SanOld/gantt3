@@ -171,89 +171,89 @@ gantt.attachEvent("onBeforeTaskDisplay", function(id, task){
 
 
   //Events
-$('#criticalPath').on('click', function(){
-    gantt.config.highlight_critical_path = !gantt.config.highlight_critical_path;
-    if(gantt.config.highlight_critical_path){
-      gantt.config.highlight_critical_path = true;
-      $(this).val("Скрыть");
-    }else{
-      gantt.config.highlight_critical_path = false;
-      $(this).val("Отобразить");
-    }
-    gantt.render();   
-})
-$('#hideGrid').on('click', function(){
-    gantt.config.show_grid = !gantt.config.show_grid;
-    if(gantt.config.show_grid){
-      gantt.config.show_grid = true;
-      $(this).val("Скрыть");
-    }else{
-      gantt.config.show_grid = false;
-      $(this).val("Отобразить");
-    }
-    gantt.render();   
-})
-$('#mancount').on('click', function(){
-    gantt.config.showManCount = !gantt.config.showManCount;
-    if(gantt.config.showManCount){
-      gantt.config.showManCount = true;
-      $(this).val("Скрыть");
-    }else{
-      gantt.config.showManCount = false;
-      $(this).val("Отобразить");
-    }
-    gantt.render();   
-})  
-$('#dateFilter').on('change', function(el){
-  var val = $( this ).find('option:selected').val(); 
-    switch (val) {
-      case "today":
-        filter_start = today;
-        break;
-      case "tomorrow":
-        filter_start = getDateAgo(today,1);
-        break;
-      case "week":
-          filter_start  = monday;
-          filter_end    = sunday;
-          break;
-        default:
-          filter_start = getDateAgo(today,-1000);
-          filter_end = getDateAgo(today,1000);
-          break;
-    }
-
- gantt.render();
-})
-$('#taskTypeFilter').on('change', function(el){
-  var val = $( this ).find('option:selected').val(); 
-    switch (val) {
-      case "task":
-        filter_task_type = "task";
-        break;
-      case "resource":
-        filter_task_type = "resource";
-        break;
-      default:
-        filter_task_type = "";
-        break;
-    }
-
- gantt.render();
-})
-$('#exportPDF').on('click', function(){
-  gantt.exportToPDF({raw:true});
-});
-$('input[name=scale]').on('change', function(e){
-  switch (e.target.value) {
-    case '5':
-//        saveConfig();
-      zoomToFit();
-      break;
-    default:
-      setScaleConfig(e.target.value);
-      gantt.render();
-      break;
-  }
-
-});
+//$('#criticalPath').on('click', function(){
+//    gantt.config.highlight_critical_path = !gantt.config.highlight_critical_path;
+//    if(gantt.config.highlight_critical_path){
+//      gantt.config.highlight_critical_path = true;
+//      $(this).val("Скрыть");
+//    }else{
+//      gantt.config.highlight_critical_path = false;
+//      $(this).val("Отобразить");
+//    }
+//    gantt.render();   
+//})
+//$('#hideGrid').on('click', function(){
+//    gantt.config.show_grid = !gantt.config.show_grid;
+//    if(gantt.config.show_grid){
+//      gantt.config.show_grid = true;
+//      $(this).val("Скрыть");
+//    }else{
+//      gantt.config.show_grid = false;
+//      $(this).val("Отобразить");
+//    }
+//    gantt.render();   
+//})
+//$('#mancount').on('click', function(){
+//    gantt.config.showManCount = !gantt.config.showManCount;
+//    if(gantt.config.showManCount){
+//      gantt.config.showManCount = true;
+//      $(this).val("Скрыть");
+//    }else{
+//      gantt.config.showManCount = false;
+//      $(this).val("Отобразить");
+//    }
+//    gantt.render();   
+//})  
+//$('#dateFilter').on('change', function(el){
+//  var val = $( this ).find('option:selected').val(); 
+//    switch (val) {
+//      case "today":
+//        filter_start = today;
+//        break;
+//      case "tomorrow":
+//        filter_start = getDateAgo(today,1);
+//        break;
+//      case "week":
+//          filter_start  = monday;
+//          filter_end    = sunday;
+//          break;
+//        default:
+//          filter_start = getDateAgo(today,-1000);
+//          filter_end = getDateAgo(today,1000);
+//          break;
+//    }
+//
+// gantt.render();
+//})
+//$('#taskTypeFilter').on('change', function(el){
+//  var val = $( this ).find('option:selected').val(); 
+//    switch (val) {
+//      case "task":
+//        filter_task_type = "task";
+//        break;
+//      case "resource":
+//        filter_task_type = "resource";
+//        break;
+//      default:
+//        filter_task_type = "";
+//        break;
+//    }
+//
+// gantt.render();
+//})
+//$('#exportPDF').on('click', function(){
+//  gantt.exportToPDF({raw:true});
+//});
+//$('input[name=scale]').on('change', function(e){
+//  switch (e.target.value) {
+//    case '5':
+////        saveConfig();
+//      zoomToFit();
+//      break;
+//    default:
+//      setScaleConfig(e.target.value);
+//      gantt.render();
+//      break;
+//  }
+//
+//});
