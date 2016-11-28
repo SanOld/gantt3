@@ -33,9 +33,12 @@ var dataProc = new gantt.dataProcessor("../app/dataGantProcessor.php");
 
   for(var i in smeta) {
     gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
-    gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
-  };
+    setTimeout(loadResource,1000,project_id,i);
 
+  };
+function loadResource(){
+  gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
+}
   if(project_id != undefined){
     gantt.message({text:"Проект :" + project_id,type:"default",expire:2000});
   } else {
