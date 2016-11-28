@@ -36,7 +36,7 @@ var dataProc = new gantt.dataProcessor("../app/dataGantProcessor.php");
     setTimeout(loadResource,1000,project_id,i);
 
   };
-function loadResource(){
+function loadResource(project_id,i){
   gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
 }
   if(project_id != undefined){
