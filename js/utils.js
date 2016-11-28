@@ -37,4 +37,3 @@ function templateRenders() {
 }
 var templates = new templateRenders();
 
-

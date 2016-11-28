@@ -60,8 +60,12 @@ function filelist($dir){
 <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
 <link href="dhtmlxSuite_v50_std/codebase/dhtmlx.css" rel="stylesheet">
-<link href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">
+<link href="css/skins/skyblue/dhtmlx.css" rel="stylesheet">
+
+<!--<link href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">-->
+<link href="css/dhtmlxgantt_skyblue.css" rel="stylesheet">
 
 <!--<link href="css/font-awesome.css" rel="stylesheet">-->
 <link href="css/helper.css" rel="stylesheet">
@@ -78,6 +82,7 @@ function filelist($dir){
 <script src="js/lib/api.js"></script>
 <script src="js/lib/dhtmlxgantt_critical_path.js"></script>
 <script src="js/lib/redefine_dhtmlxGantt.js"></script>
+<script src="js/lib/dhtmlxgantt_multiselect.js"></script>
 
 <script src="js/test_data.js"></script>
 <script src="js/utils/underscore.js"></script>

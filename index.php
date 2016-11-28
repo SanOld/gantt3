@@ -28,23 +28,25 @@ if(isset($_GET['smeta']) ){
 //   var smeta = {};
    smeta = <?php echo($smeta); ?>;
    var env = '<?php echo ENV; ?>';
-
-
  </script>
 
 <?php include('head.php'); ?>
 
 </head>
-<body>
+<body id="bd">
+
+  
+
+  
+  
+  
 <div id="page">
   <?php include('menu.php'); ?>
 </div>
  
   
-<div class="clearfix"></div>  
-<div id="layoutObj">
-  <!--<div id="gantt_here"></div>-->
-</div> 
+
+
 
 
 <div class="md-overlay"></div>
