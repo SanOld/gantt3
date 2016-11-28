@@ -43,7 +43,7 @@ if(isset($_GET['smeta']) ){
   
 <div class="clearfix"></div>  
 <div id="layoutObj">
-  <div id="gantt_here"></div>
+  <!--<div id="gantt_here"></div>-->
 </div> 
 
 
