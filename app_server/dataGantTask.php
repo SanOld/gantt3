@@ -6,7 +6,7 @@ include ('db_pdo.php');
 
  
 $gantt = new JSONGanttConnector($res, "PDO");
-
+$gantt->enable_log("Log",true);
 function getTaskColumns() {
 	$columns = array (
                         'start_date'
@@ -14,7 +14,6 @@ function getTaskColumns() {
                        ,'name'
                        ,'parent'
                        ,'progress'
-                       ,'parent'
                        ,'project_id'
                        ,'smeta_id'
                        ,'deadline'
@@ -26,7 +25,6 @@ function getTaskColumns() {
                        ,'workload'
                        ,'mancount'
                        ,'description'
-                       ,'progress'
                        ,'sortorder'
                     );
 	return implode ( ',', $columns );

@@ -6,18 +6,19 @@ $(document).ready(function() {
    }
   var financeWindow;
   //вспомогательные функции
-  include("/js/utils.js");
+  include("/js/utils.js?"+hash);
   //Редактор оплат
-  include("/js/financeEditor.js");
+  include("/js/financeEditor.js?"+hash);
   //События клавиатуры
-  include("/js/keyEvent.js");
+  include("/js/keyEvent.js?"+hash);
   //Инструменты масштабирования
-  include("/js/scale.js"); 
+  include("/js/scale.js?"+hash); 
 
-  include("/js/ganttConfig.js");
-  include("/js/gantEvents.js");
+  include("/js/ganttConfig.js?"+hash);
+  include("/js/gantEvents.js?"+hash);
   //Дополнительные настройки
-  include("/js/gantFeatures.js");
+  include("/js/gantFeatures.js?"+hash);
   //Инициализация диаграммы
-  include("/js/script.js");
+  include("/js/script.js?"+hash);
+
 });

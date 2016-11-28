@@ -38,22 +38,15 @@ if(isset($_GET['smeta']) ){
 <body>
 <div id="page">
   <?php include('menu.php'); ?>
-  
 </div>
  
   
 <div class="clearfix"></div>  
-<div id="gantt_here"></div>
+<div id="layoutObj">
+  <div id="gantt_here"></div>
+</div> 
 
-<div class="footer">
-  <div class="container">
-    <div class="col-lg-7">
-      <a href="" class="pull-left m-t-10">
-        <img src="">
-      </a>
-    </div>
-  </div>
-</div>
+
 <div class="md-overlay"></div>
 
 <!--TEMPLATES-->

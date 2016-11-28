@@ -1,5 +1,5 @@
 // gantt.message({text:val,expire:-1}); 
-var dataProcessor = new gantt.dataProcessor("../app/dataGantProcessor.php");
+
 
 var defaultValue = {
     hours : 8
@@ -58,6 +58,7 @@ gantt.config.columns=[
 {name:"add",         label:"",           width:44 },
 ];
 
+
 //=======================================
 function customTaskName(task){
   if(task.type == 'resource')
@@ -109,24 +110,15 @@ function getFinanceTemplate(task) {
    return text;
 }
 //=======================================
-
+gantt.config.types.project = "project";
+gantt.config.types.smeta = "smeta";
 gantt.config.types.task = "task";
 gantt.config.types.resource = "resource";
 
 //css template for each task type
 gantt.templates.task_class = function (start, end, task) {
-  var result = "";
-  switch (task.type) {
-    case gantt.config.types.task:
-      result = 'task';
-      break;
-    case gantt.config.types.resource:
-      result = 'resource';
-      break;
-    default:
-      result = 'resource';
-      break;
-  }
+
+  var result = gantt.config.types[task.type] ;
 
   if (task.deadline && end.valueOf() > task.deadline.valueOf()) {
   result = result + ' overdue';
@@ -146,13 +138,14 @@ gantt.templates.task_cell_class = function(task, date){
 
 
 
-gantt.config.preserve_scroll = true; 
+//gantt.config.preserve_scroll = true; 
 gantt.config.autosize = true;
 // ordering tasks only inside a branch
 gantt.config.order_branch = true;
 gantt.config.order_branch_free = true;
 gantt.config.highlight_critical_path = true; 
 
+gantt.locale.labels.section_name = "Наименование";
 gantt.locale.labels.section_description = "Описание";
 gantt.locale.labels.section_time = "Дата начала / Длительность, дней";
 gantt.locale.labels.section_mancount = "Количество рабочих, чел.";
@@ -170,7 +163,8 @@ for (var i in resource_type){
 }
 //lightbox.sections
 gantt.config.lightbox.sections = [
-   {name: "description",      height:70, type:"textarea",   map_to:"description", focus:true}
+   {name: "name",             height:70, type:"textarea",   map_to:"text", focus:true}
+  ,{name: "description",      height:70, type:"textarea",   map_to:"description"}
   ,{name: "hours",            height:30, type:"template",   map_to:"hours_template"}
   ,{name: "manhours",         height:30, type:"template",   map_to:"manhours_template"}
   ,{name: "mancount",         height:30, type:"template",   map_to:"mancount_template"}

@@ -1,3 +1,55 @@
+<?php
+$dir1 = "./";
+//
+//$files_array = dirlist($dir1);
+//$hash = md5(implode(':',$files_array)) || "";
+$hash = "";
+// возвращает массив всех файлов директории вкл файлы пддиректорий
+function dirlist($dir){ 
+  
+  $files = [];
+  
+  if (@is_dir($dir)) {
+    $opendir = opendir($dir);
+      while ( ($filename = readdir($opendir)) !== false )
+      {
+        if($filename != '.' && $filename != '..'){
+          $isDir = @is_dir($dir . $filename . "/");
+          if ($isDir == false)
+          {
+              $fileHash = filemtime(strtolower($dir . $filename));
+              $files[] = $fileHash;
+          } else {
+             $files = array_merge($files, dirlist($dir . $filename . "/"));
+          }
+        }
+      }
+      closedir($opendir);
+  }
+   return $files;
+}
+// возвращает массив всех файлов директории
+function filelist($dir){
+  $files=[];
+  
+  $opendir = opendir($dir);
+
+  while ($filename = readdir($opendir))
+  {
+
+      $isDir = @is_dir($dir . $filename . '/');
+      if ($isDir == false)
+      {
+          $fileHash = filemtime(strtolower($dir . $filename));
+          $files[] = $fileHash;
+      } 
+  }
+
+  closedir($opendir);
+
+  return $files;
+}
+?>
 <title>Диаграмма Ганта</title>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 <meta charset="utf-8">
@@ -27,10 +79,10 @@
 <script src="js/lib/dhtmlxgantt_critical_path.js"></script>
 <script src="js/lib/redefine_dhtmlxGantt.js"></script>
 
-
 <script src="js/test_data.js"></script>
 <script src="js/utils/underscore.js"></script>
-<script src="js/init.js"></script>
+<script src="js/init.js?<?php echo $hash;?>"></script>
+<script> var hash = "<?php echo $hash;?>" </script>
 
 
 
