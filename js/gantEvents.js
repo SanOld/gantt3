@@ -25,7 +25,10 @@ function getParam(task, val){
 gantt.attachEvent("onBeforeLightbox", function(id) { 
   
   var task = current_task = gantt.getTask(id);
-  alert(task.type)
+//  alert(task.id)
+//  alert(task.project_id)
+//  alert(task.smeta_id)
+//  alert(task.parent)
   gantt.getLightboxSection('name').setValue(task.name);
   task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getParam(task, 'hours') + ">";
   task.manhours_template = "<input type='number' class='manhours'  step='0.1'  value=" + getParam(task, 'manhours') + ">";
@@ -35,7 +38,7 @@ gantt.attachEvent("onBeforeLightbox", function(id) {
   return true
 }); 
 gantt.attachEvent("onLightboxSave", function(id, item, is_new){
-  window.console.log(item);
+
   if(is_new);{
     var parent_task = gantt.getTask(item.parent);
     item.smeta_id = parent_task.smeta_id;
@@ -146,7 +149,12 @@ gantt.attachEvent("onTaskLoading", function(task){
   task.mancount = ("mancount" in task) ? task.mancount : defaultValue.mancount;
   task.resource_amount = ("resource_amount" in task) ? task.resource_amount : defaultValue.resource_amount;
   task.ed_izm = ("ed_izm" in task) ? task.ed_izm : defaultValue.ed_izm;
-  task.parent = ("parent" in task) && +task.parent != 0 ? task.parent : task.smeta_id;
+  if(task.type != 'project'){
+    task.parent = ("parent" in task) && +task.parent != 0 ? task.parent :  ("s"+task.smeta_id);
+  } else {
+    task.parent = ("parent" in task) && +task.parent != 0 ? task.parent : 0;
+  }
+  
 //    window.console.log(task.start_date-today);
   return true;
 });

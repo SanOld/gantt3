@@ -25,7 +25,7 @@
 //
 //   ]
 //});
-
+//**
 var mainWins = new dhtmlXWindows();
 
 var main = mainWins.createWindow("main", 20, 30, 300, 200);
@@ -204,19 +204,18 @@ dataProc.attachEvent("onBeforeUpdate", function (id, status, data) {
 //  gantt.load("../app/data.php");
 
   var projectHeader = {data:[]};
-  projectHeader.data.push({id:project_id, text:project, start_date:"2016-11-25 00:00:00", duration:1, open: true, type: "project"});
+  projectHeader.data.push({id: "p"+project_id, text:project, start_date:"2016-11-25 00:00:00", duration:1, open: true, type: "project"});
 
   for(var i in smeta) {
-    projectHeader.data.push({id:i, text:smeta[i], start_date:"2016-11-25 00:00:00", duration:1, open: true, type: "smeta", parent: project_id, smeta_id: i, project_id: project_id})
+    projectHeader.data.push({id:("s" + i), text:smeta[i], start_date:"2016-11-25 00:00:00", duration:1, open: true, type: "smeta", parent: ("p" + project_id), smeta_id: ("s" + i), project_id: project_id})
   };
-  
+
   gantt.init("gantt_here");
   gantt.parse(projectHeader, "json");
 
   for(var i in smeta) {
     gantt.load("../app/dataGantTask.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);
     setTimeout(loadResource,1000,project_id,i);
-
   };
   function loadResource(project_id,i){
     gantt.load("../app/dataGantResource.php?connector=true&dhx_filter[project_id]=" + project_id + "&dhx_filter[smeta_id]=" + i);

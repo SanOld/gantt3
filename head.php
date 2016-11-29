@@ -1,5 +1,5 @@
 <?php
-$dir1 = "/js/";
+$dir1 = "js/";
 //
 $files_array = dirlist($dir1);
 $hash = md5(implode(':',$files_array));
@@ -65,8 +65,8 @@ function filelist($dir){
 <!--<link href="css/dhtmlx.css" rel="stylesheet">-->
 <link href="css/skins/terrace/dhtmlx.css" rel="stylesheet">
 
-<!--<link href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">-->
-<link href="css/dhtmlxgantt_terrace.css" rel="stylesheet">
+<link href="dhtmlxGantt_v4.1.0/codebase/dhtmlxgantt.css" rel="stylesheet">
+<!--<link href="css/dhtmlxgantt_terrace.css" rel="stylesheet">-->
 
 <!--<link href="css/font-awesome.css" rel="stylesheet">-->
 <link href="css/helper.css?<?php echo $hash;?>" rel="stylesheet">
