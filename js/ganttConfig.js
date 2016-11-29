@@ -68,6 +68,12 @@ function customTaskName(task){
 function getTaskType(task){
   var text = "";
   switch (task.type) {
+    case "project":
+      text = "Проект";
+      break;
+    case "smeta":
+      text = "Смета";
+      break;    
     case "task":
       text = "Задача";
       break;
@@ -121,7 +127,7 @@ gantt.templates.task_class = function (start, end, task) {
   var result = gantt.config.types[task.type] ;
 
   if (task.deadline && end.valueOf() > task.deadline.valueOf()) {
-  result = result + ' overdue';
+    result = result + ' overdue';
   }    
 
   return result;

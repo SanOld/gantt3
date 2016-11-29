@@ -2,10 +2,15 @@ $(document).ready(function() {
   function include(url) {
        var script = document.createElement('script');
        script.src = url;
+       script.async = false;
        document.getElementsByTagName('body')[0].appendChild(script);
    }
   var financeWindow;
   //вспомогательные функции
+
+
+
+
   include("/js/utils.js?"+hash);
   //Редактор оплат
   include("/js/financeEditor.js?"+hash);

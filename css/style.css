@@ -155,3 +155,7 @@ div#winVP {
   .fa-usd{
 		color: red;
 	}
+  
+  .smeta .gantt_tree_icon.gantt_file {
+        background-image: url("../css/skins/terrace/imgs/dhxtree_terrace/folderClosed.gif")!important;
+}

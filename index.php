@@ -41,9 +41,9 @@ if(isset($_GET['smeta']) ){
   
   
 <div id="page">
-  <?php include('menu.php'); ?>
+   <?php include('menu.php'); ?>
 </div>
- 
+
   
 
 

@@ -23,7 +23,9 @@ function getParam(task, val){
 };
 
 gantt.attachEvent("onBeforeLightbox", function(id) { 
+  
   var task = current_task = gantt.getTask(id);
+  alert(task.type)
   gantt.getLightboxSection('name').setValue(task.name);
   task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getParam(task, 'hours') + ">";
   task.manhours_template = "<input type='number' class='manhours'  step='0.1'  value=" + getParam(task, 'manhours') + ">";
