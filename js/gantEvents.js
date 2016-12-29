@@ -25,15 +25,15 @@ function getParam(task, val){
 gantt.attachEvent("onBeforeLightbox", function(id) { 
   
   var task = current_task = gantt.getTask(id);
-//  alert(task.id)
+//  alert(task.id) +++
 //  alert(task.project_id)
 //  alert(task.smeta_id)
 //  alert(task.parent)
   gantt.getLightboxSection('name').setValue(task.name);
   task.hours_template = "<input type='number' class='hours'  step='0.5' min='0.5' value=" + getParam(task, 'hours') + ">";
   task.manhours_template = "<input type='number' class='manhours'  step='0.1'  value=" + getParam(task, 'manhours') + ">";
-  task.mancount_template = "<input type='number' class='mancount'  step='0.1'  value=" + getParam(task, 'mancount') + ">";
-  task.resource_amount_template = "<input type='number' class='mancount'  step='0.1'  value=" + getParam(task, 'resource_amount') + ">";
+  task.mancount_template = "<input type='number' class='mancount'  step='1'  value=" + getParam(task, 'mancount') + ">";
+  task.resource_amount_template = "<input type='number' class='resource_amount'  step='0.1'  value=" + getParam(task, 'resource_amount') + ">";
   task.ed_izm_template = "<input type='text' class='ed_izm'     value=" + getParam(task, 'ed_izm') + ">";
   return true
 }); 
