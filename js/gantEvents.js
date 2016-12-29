@@ -109,12 +109,14 @@ gantt.attachEvent("onLightbox", function (task_id){
   });    
 
   $('.gantt_duration_dec').on('click', function(){
-    mancount.val((manhours.val()/new_duration.val()/hours.val()).toFixed(2)); 
-    task.mancount = mancount.val();
+    var val = Math.ceil((manhours.val()/new_duration.val()/hours.val()));
+    mancount.val(val); 
+    task.mancount = mancount.val(val); 
   }) 
   $('.gantt_duration_inc').on('click', function(){
-    mancount.val((manhours.val()/new_duration.val()/hours.val()).toFixed(2)); 
-    task.mancount = mancount.val();
+    var val = Math.ceil((manhours.val()/new_duration.val()/hours.val()));
+    mancount.val(val); 
+    task.mancount = mancount.val(val); 
   })
 });
 gantt.attachEvent("onTaskLoading", function(task){

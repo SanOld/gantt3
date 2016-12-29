@@ -1,5 +1,5 @@
 <?php
-define('ENV', 'dev'); //prod or dev
+define('ENV', 'prod'); //prod or dev
 
 switch ( ENV ) {
   case 'prod':
@@ -7,8 +7,8 @@ switch ( ENV ) {
     define('GANTT_HOST', 'http://innakhx4.bget.ru/');
     break;
   case 'dev':
-    define('DATA_HOST', 'http://gantt3/');
-    define('GANTT_HOST', 'http://gantt3/');
+    define('DATA_HOST', 'http://gantt/');
+    define('GANTT_HOST', 'http://gantt/');
     break;
 }
 
