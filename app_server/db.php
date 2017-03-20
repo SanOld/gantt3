@@ -17,5 +17,6 @@ define('TBL_PAYMENT', 'plan_payment'); //innakhx4_gantt
 // Mysql
 $dbtype = "PDO";
 
-$res = new PDO ( "mysql:dbname=" . DB_DATABASE . ";host=" . DB_HOST, DB_USER, DB_PASSWORD );
+//$res = new PDO ( "mysql:dbname=" . DB_DATABASE . ";host=" . DB_HOST, DB_USER, DB_PASSWORD );
+$res = new PDO ( "mysql:dbname=" . DB_DATABASE . ";host=" . DB_HOST, DB_USER, DB_PASSWORD, array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8") );
 //mysql_select_db(DB_DATABASE);
